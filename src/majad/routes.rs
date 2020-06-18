@@ -1,28 +1,9 @@
-use diesel::{Queryable, Insertable};
-use diesel::prelude::*;
-use serde::{Serialize, Deserialize};
 use rocket_contrib::json::Json;
+use diesel::prelude::*;
 
 use crate::DbConn;
 use crate::schema::majad_clase;
-
-#[derive(Queryable, Serialize)]
-pub struct Clase {
-    id: i32,
-    codigo: String,
-    nombre: String,
-    description: Option<String>
-}
-
-#[derive(Insertable, Deserialize)]
-#[table_name = "majad_clase"]
-pub struct NewClase {
-    codigo: String,
-    nombre: String,
-    description: Option<String>
-}
-
-
+use crate::majad::models::{NewClase, Clase};
 
 
 #[post("/clases", data = "<add_clase>")]
